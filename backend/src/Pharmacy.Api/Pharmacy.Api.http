@@ -1,0 +1,8 @@
+@host = http://localhost:5001
+
+### Health
+GET {{host}}/health
+
+### Bootstrap CSRF cookie
+GET {{host}}/api/v1/auth/csrf
+Origin: http://localhost:5173

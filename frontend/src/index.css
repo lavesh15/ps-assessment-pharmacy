@@ -1,0 +1,286 @@
+:root {
+  --bg: #f3f6f4;
+  --surface: #ffffff;
+  --text: #1c2b24;
+  --muted: #5c6b64;
+  --line: #d7e0db;
+  --brand: #0f766e;
+  --brand-dark: #0b5b55;
+  --danger: #b91c1c;
+  --warn: #a16207;
+  --shadow: 0 12px 30px rgba(15, 40, 32, 0.08);
+  font-family: "Segoe UI", system-ui, sans-serif;
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.45;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+button {
+  background: var(--brand);
+  color: #fff;
+  border: 0;
+  border-radius: 8px;
+  padding: 0.65rem 1rem;
+  cursor: pointer;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+button.secondary {
+  background: #fff;
+  color: var(--text);
+  border: 1px solid var(--line);
+}
+
+.icon-button {
+  background: transparent;
+  color: var(--muted);
+  padding: 0 0.4rem;
+  font-size: 1.4rem;
+}
+
+input,
+textarea {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 0.55rem 0.7rem;
+  margin-top: 0.3rem;
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.75rem;
+  color: var(--brand);
+  margin: 0 0 0.25rem;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.form-error {
+  color: var(--danger);
+  margin: 0;
+}
+
+.page-loading,
+.error-fallback {
+  padding: 4rem 1.5rem;
+  text-align: center;
+}
+
+.login-layout {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 1.5rem;
+}
+
+.card {
+  background: var(--surface);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  padding: 1.75rem;
+}
+
+.login-card {
+  width: min(420px, 100%);
+  display: grid;
+  gap: 0.9rem;
+}
+
+.login-card h1,
+.app-shell h1 {
+  margin: 0 0 0.4rem;
+  font-size: 1.7rem;
+}
+
+.app-shell {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+
+.topbar,
+.toolbar,
+.legend,
+.modal-header,
+.modal-actions,
+.topbar-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.topbar {
+  margin-bottom: 1.25rem;
+}
+
+.toolbar {
+  margin-bottom: 0.75rem;
+}
+
+.search {
+  max-width: 360px;
+  margin: 0;
+}
+
+.legend {
+  justify-content: flex-start;
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin-bottom: 0.75rem;
+}
+
+.swatch {
+  display: inline-block;
+  width: 0.9rem;
+  height: 0.9rem;
+  border-radius: 3px;
+  margin-right: 0.35rem;
+  vertical-align: -0.1rem;
+}
+
+.swatch.expiring {
+  background: #f8b4b4;
+}
+
+.swatch.low-stock {
+  background: #fde68a;
+}
+
+.table-wrap {
+  background: var(--surface);
+  border-radius: 12px;
+  overflow: auto;
+  box-shadow: var(--shadow);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 0.8rem 1rem;
+  border-bottom: 1px solid var(--line);
+}
+
+th {
+  font-size: 0.85rem;
+  color: var(--muted);
+  background: #eef4f1;
+}
+
+.row-expiring {
+  background: #fecaca;
+}
+
+.row-low-stock {
+  background: #fef08a;
+}
+
+.empty {
+  text-align: center;
+  color: var(--muted);
+}
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(16, 32, 28, 0.45);
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+}
+
+.modal {
+  width: min(560px, 100%);
+  background: var(--surface);
+  border-radius: 14px;
+  padding: 1.2rem 1.3rem 1.4rem;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.85rem;
+}
+
+.full {
+  grid-column: 1 / -1;
+}
+
+.modal-actions {
+  justify-content: flex-end;
+}
+
+.toast-stack {
+  position: fixed;
+  right: 1rem;
+  top: 1rem;
+  z-index: 20;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.toast {
+  border: 0;
+  min-width: 240px;
+  text-align: left;
+  box-shadow: var(--shadow);
+}
+
+.toast-success {
+  background: var(--brand);
+}
+
+.toast-error {
+  background: var(--danger);
+}
+
+.toast-info {
+  background: #334155;
+}
+
+@media (max-width: 720px) {
+  .topbar,
+  .toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .search {
+    max-width: none;
+  }
+}

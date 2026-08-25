@@ -1,0 +1,20 @@
+## Build
+**/bin/
+**/obj/
+**/logs/
+*.user
+*.suo
+.vs/
+.idea/
+
+## Frontend
+frontend/node_modules/
+frontend/dist/
+
+## OS
+.DS_Store
+Thumbs.db
+
+## Secrets / local
+appsettings.*.local.json
+.env.local
