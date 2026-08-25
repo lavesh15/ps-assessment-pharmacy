@@ -49,7 +49,7 @@ public sealed class CsrfAndOriginMiddleware
                 return;
             }
 
-            if (!IsValidCsrf(context))
+            if (!IsSameOrigin(context) && !IsValidCsrf(context))
             {
                 context.Response.StatusCode = StatusCodes.Status403Forbidden;
                 await context.Response.WriteAsJsonAsync(new
@@ -67,7 +67,9 @@ public sealed class CsrfAndOriginMiddleware
     }
 
     private static bool IsExempt(PathString path) =>
-        path.StartsWithSegments("/openapi") || path.StartsWithSegments("/health");
+        path.StartsWithSegments("/openapi")
+        || path.StartsWithSegments("/swagger")
+        || path.StartsWithSegments("/health");
 
     private void EnsureCsrfCookie(HttpContext context)
     {
@@ -87,6 +89,19 @@ public sealed class CsrfAndOriginMiddleware
         });
     }
 
+    private static bool IsSameOrigin(HttpContext context)
+    {
+        var origin = context.Request.Headers.Origin.FirstOrDefault();
+        if (string.IsNullOrWhiteSpace(origin) || !Uri.TryCreate(origin, UriKind.Absolute, out var uri))
+        {
+            return false;
+        }
+
+        var originValue = $"{uri.Scheme}://{uri.Authority}";
+        var requestOrigin = $"{context.Request.Scheme}://{context.Request.Host.Value}";
+        return string.Equals(originValue, requestOrigin, StringComparison.OrdinalIgnoreCase);
+    }
+
     private bool IsAllowedOrigin(HttpContext context)
     {
         var origin = context.Request.Headers.Origin.FirstOrDefault()
@@ -103,7 +118,9 @@ public sealed class CsrfAndOriginMiddleware
         }
 
         var originValue = $"{uri.Scheme}://{uri.Authority}";
-        return _frontend.AllowedOrigins.Contains(originValue, StringComparer.OrdinalIgnoreCase);
+        var requestOrigin = $"{context.Request.Scheme}://{context.Request.Host.Value}";
+        return _frontend.AllowedOrigins.Contains(originValue, StringComparer.OrdinalIgnoreCase)
+               || string.Equals(originValue, requestOrigin, StringComparison.OrdinalIgnoreCase);
     }
 
     private bool IsValidCsrf(HttpContext context)

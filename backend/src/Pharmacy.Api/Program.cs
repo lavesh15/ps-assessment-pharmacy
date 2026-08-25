@@ -139,6 +139,11 @@ try
     if (app.Environment.IsDevelopment())
     {
         app.MapOpenApi();
+        app.UseSwaggerUI(options =>
+        {
+            options.SwaggerEndpoint("/openapi/v1.json", "Pharmacy API v1");
+            options.RoutePrefix = "swagger";
+        });
     }
 
     app.UseCors("Frontend");

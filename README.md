@@ -12,6 +12,8 @@ Use two terminals.
 dotnet run --project backend/src/Pharmacy.Api
 ```
 
+Swagger UI (Development only): http://localhost:5001/swagger
+
 ### 2. Web UI (`http://localhost:5173`)
 
 ```bash
@@ -24,6 +26,8 @@ Open http://localhost:5173 and sign in with:
 
 - Username: `admin`
 - Password: `Admin@123`
+
+Architecture, class/sequence diagrams, security, and debug steps: [DOCUMENTATION.md](DOCUMENTATION.md).
 
 ## Assignment features
 
